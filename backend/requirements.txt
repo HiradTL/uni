@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sqlmodel
+pydantic
+sqlalchemy
+python-jose
+passlib
+bcrypt
+python-multipart
+jdatetime
+requests

@@ -1,0 +1,13 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY Uni.py ./
+COPY Final.db ./
+
+RUN apt-get update && apt-get install -y gcc libpq-dev && \
+    pip install --no-cache-dir fastapi uvicorn sqlmodel jdatetime
+
+EXPOSE 8000
+
+CMD ["uvicorn", "Uni:app", "--host", "0.0.0.0", "--port", "8000"]

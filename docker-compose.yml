@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: university-backend
+    ports:
+      - "8000:8000"
+    networks:
+      - uni-net
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: university-frontend
+    ports:
+      - "8501:8501"
+    networks:
+      - uni-net
+
+  nginx:
+    image: nginx:latest
+    container_name: university-nginx
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - uni-net
+
+networks:
+  uni-net:
+    driver: bridge
